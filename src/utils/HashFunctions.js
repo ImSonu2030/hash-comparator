@@ -1,29 +1,26 @@
 import CryptoJS from 'crypto-js';
 
+const toWordArray = (inputBytes) => {
+  if (inputBytes instanceof ArrayBuffer) {
+    inputBytes = new Uint8Array(inputBytes);
+  }
+  return CryptoJS.lib.WordArray.create(inputBytes);
+};
+
 export const MD5 = async (inputBytes) => {
-  const wordArray = CryptoJS.lib.WordArray.create(inputBytes); 
+  const wordArray = toWordArray(inputBytes);
   const hash = CryptoJS.MD5(wordArray);
   return hash.toString(CryptoJS.enc.Hex);
-}
+};
 
 export const SHA1 = async (inputBytes) => {
-    const buffer = inputBytes instanceof ArrayBuffer ? inputBytes : inputBytes.buffer;
-
-    const hashBuffer = await crypto.subtle.digest('SHA-1', buffer);
-
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-  return hashHex;
-}
+  const wordArray = toWordArray(inputBytes);
+  const hash = CryptoJS.SHA1(wordArray);
+  return hash.toString(CryptoJS.enc.Hex);
+};
 
 export const SHA256 = async (inputBytes) => {
-    const buffer = inputBytes instanceof ArrayBuffer ? inputBytes : inputBytes.buffer;
-
-    const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
-
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-    return hashHex;
-}
+  const wordArray = toWordArray(inputBytes);
+  const hash = CryptoJS.SHA256(wordArray);
+  return hash.toString(CryptoJS.enc.Hex);
+};

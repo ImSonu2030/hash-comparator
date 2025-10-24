@@ -15,6 +15,7 @@ export const InputSelector = () => {
     generateShuffledImage,
     suffle,
     setSuffle,
+    setHashValues,
   } = useContext(AppContext);
 
   const handleSubmit = async (e) => {
@@ -43,6 +44,14 @@ export const InputSelector = () => {
     }
   };
 
+  const handleInputTypeChange=(type)=>{
+    setHashValues([]);
+    if(type==="text") {
+      setInputType("text")
+    }else {
+      setInputType("image");
+    }
+  }
   return (
     <div className="max-w-lg mx-auto mt-10 p-8 bg-white rounded-md shadow-md border border-gray-200">
       <h2 className="text-3xl font-bold mb-6 text-left text-gray-800">
@@ -50,7 +59,7 @@ export const InputSelector = () => {
       </h2>
       <div className="flex justify-center gap-4 mb-8">
         <button 
-          onClick={() => setInputType("text")}
+          onClick={() => handleInputTypeChange("text")}
           className={`px-6 py-2 rounded-lg font-semibold cursor-pointer transition-all duration-300 w-1/2 ${
             inputType === "text"
               ? "bg-indigo-600 text-white shadow-md"
@@ -60,7 +69,7 @@ export const InputSelector = () => {
           Manual Input
         </button>
         <button
-          onClick={() => setInputType("image")}
+          onClick={() => handleInputTypeChange("image")}
           className={`px-6 py-2 rounded-lg font-semibold cursor-pointer transition-all duration-300 w-1/2 ${
             inputType === "image"
               ? "bg-indigo-600 text-white shadow-md"
@@ -87,7 +96,7 @@ export const InputSelector = () => {
                 id="input1"
                 value={textInput1}
                 onChange={(e) => setTextInput1(e.target.value)}
-                className="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-100 focus:border-indigo-500"
                 placeholder="Enter your input"
                 required
               />
@@ -104,7 +113,7 @@ export const InputSelector = () => {
                 id="input2"
                 value={textInput2}
                 onChange={(e) => setTextInput2(e.target.value)}
-                className="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-100 focus:border-indigo-500"
                 placeholder="Enter your input"
                 required
               />
