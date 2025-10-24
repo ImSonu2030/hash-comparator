@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
+import { toast,ToastContainer } from "react-toastify";
 
 export const InputSelector = () => {
   const {
@@ -22,7 +23,7 @@ export const InputSelector = () => {
     e.preventDefault();
     if (inputType === "text") {
       if (textInput1.trim() === "" || textInput2.trim() === "") {
-        alert("Input missing");
+        toast.error("Input missing");
         setTextInput1("");
         setTextInput2("");
         return;
@@ -30,7 +31,7 @@ export const InputSelector = () => {
       generateHashValues(textInput1, textInput2);
     } else {
       if (!imageInput) {
-        alert("No image selected!");
+        toast.error("Please upload an Image");
         setImageInput(null);
         return;
       }
@@ -45,7 +46,11 @@ export const InputSelector = () => {
   };
 
   const handleInputTypeChange=(type)=>{
+    setSuffle(false);
     setHashValues([]);
+    setTextInput1("");
+    setTextInput2("");
+    setImageInput(null);
     if(type==="text") {
       setInputType("text")
     }else {
@@ -54,6 +59,18 @@ export const InputSelector = () => {
   }
   return (
     <div className="max-w-lg mx-auto mt-10 p-8 bg-white rounded-md shadow-md border border-gray-200">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <h2 className="text-3xl font-bold mb-6 text-left text-gray-800">
         Enter Input
       </h2>
@@ -62,7 +79,7 @@ export const InputSelector = () => {
           onClick={() => handleInputTypeChange("text")}
           className={`px-6 py-2 rounded-lg font-semibold cursor-pointer transition-all duration-300 w-1/2 ${
             inputType === "text"
-              ? "bg-indigo-600 text-white shadow-md"
+              ? "bg-gray-700 text-white shadow-md"
               : "bg-gray-200 text-gray-800 hover:bg-gray-300"
           }`}
         >
@@ -72,7 +89,7 @@ export const InputSelector = () => {
           onClick={() => handleInputTypeChange("image")}
           className={`px-6 py-2 rounded-lg font-semibold cursor-pointer transition-all duration-300 w-1/2 ${
             inputType === "image"
-              ? "bg-indigo-600 text-white shadow-md"
+              ? "bg-gray-700 text-white shadow-md"
               : "bg-gray-200 text-gray-800 hover:bg-gray-300"
           }`}
         >
@@ -80,7 +97,6 @@ export const InputSelector = () => {
         </button>
       </div>
 
-      {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-6">
         {inputType === "text" ? (
           <div className="space-y-4 animate-fadeIn">
@@ -148,7 +164,7 @@ export const InputSelector = () => {
                 type="button"
                 onClick={() => setSuffle((prev) => !prev)}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 ${
-                  suffle ? "bg-green-500" : "bg-gray-300"
+                  suffle ? "bg-gray-700" : "bg-gray-300"
                 }`}
               >
                 <span
@@ -165,7 +181,7 @@ export const InputSelector = () => {
         <div className="pt-4">
           <button
             type="submit"
-            className="w-full flex justify-center py-3 border border-transparent rounded-md shadow-sm cursor-pointer text-md font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            className="w-full flex justify-center py-3 border border-transparent rounded-md shadow-sm cursor-pointer text-md font-medium text-white bg-gray-700 hover:bg-gray-800 focus:outline-none"
           >
             Submit
           </button>

@@ -85,8 +85,6 @@ const AppContextProvider = (props) => {
         times: avgSHA256,
       },
     ];
-    console.log(newHashValues);
-    
     setHashValues(newHashValues);
     setIsHashGeneratorRunning(false);
   };

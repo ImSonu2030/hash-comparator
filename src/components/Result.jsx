@@ -32,7 +32,7 @@ export const Result = () => {
                 className="bg-white shadow-md rounded-md p-4 border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <h3 className="text-xl font-semibold text-blue-600 mb-4 text-center">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
                     {hashObj.id}
                   </h3>
 
@@ -49,8 +49,8 @@ export const Result = () => {
                 </div>
 
                 {/* Time section */}
-                <div className="mt-4 text-sm bg-green-500 rounded-sm px-2 py-1 text-gray-800 border-t border-gray-200 pt-2">
-                  <span className="font-medium text-black">Time:</span>{' '}
+                <div className="mt-4 text-sm bg-gray-700 rounded-sm px-2 py-1 text-white border-t border-gray-200 pt-2">
+                  <span className="font-medium text-white">Time:</span>{' '}
                   {hashObj.times ? `${hashObj.times.toFixed(2)} ms` : '0'}
                 </div>
               </motion.div>
